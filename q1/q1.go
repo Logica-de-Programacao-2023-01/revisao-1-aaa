@@ -5,6 +5,7 @@ func CalculateDiscount(currentPurchase float64, purchaseHistory []float64) (floa
 	discount := 0
 	soma := 0
 	valor := currentPurchase
+	err := nil
 	
 	//conseguir o total do histórico de compras
 	for i := range purchaseHistory{
@@ -15,7 +16,7 @@ func CalculateDiscount(currentPurchase float64, purchaseHistory []float64) (floa
 	
 	if soma <= 0.0{
 		
-		return errors.New("Valor de compra insuficiente.")
+		return 0, fmt.Errorf("Valor insuficiente.")
 	}
 	if soma <= 500.0{
 		discount = 0.02 * valor
@@ -33,8 +34,7 @@ func CalculateDiscount(currentPurchase float64, purchaseHistory []float64) (floa
 		discount = 0.2 * valor
 	}
 
-	return desconto, nil
 	fmt.Print("Valor do desconto:")
 	fmt.Print("Erro:", err)
-	return 0, nil
+	return desconto, nil
 }
